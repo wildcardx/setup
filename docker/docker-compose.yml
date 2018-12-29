@@ -1,0 +1,24 @@
+version: '2'
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    volumes:
+    - /usr/share/nginx/html
+    - /opt/node/nginx-proxy/vhost.d:/etc/nginx/vhost.d
+    - /var/run/docker.sock:/tmp/docker.sock:ro
+    - /opt/node/nginx-proxy/certs:/etc/nginx/certs:ro
+    ports:
+    - 80:80/tcp
+    - 443:443/tcp
+    labels:
+      com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: 'true'
+  nginx-letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    environment:
+      DEBUG: 'true'
+      ONLY_EXPOSED: '0'
+    volumes:
+    - /opt/node/nginx-proxy/certs:/etc/nginx/certs:rw
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    volumes_from:
+    - nginx-proxy
