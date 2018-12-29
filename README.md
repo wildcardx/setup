@@ -1,2 +1,2 @@
-# setup
+# Setup
 Different setup files 
