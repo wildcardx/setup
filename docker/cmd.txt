@@ -1,0 +1,20 @@
+Important Commands
+
+Enter running Container as root
+docker exec -it -u 0 <Container> bash
+
+Connect docker network to container
+docker network connect root_default 4af2d6b3fcd8
+
+Jenkins run from image with enviroment variables for letsencrypt nginx
+docker run -p :8080 -e "VIRTUAL_HOST=jenkins.midifightclub.com" -e "VIRTUAL_PORT=8080" -e "LETSENCRYPT_HOST=jenkins.midifightclub.com" -e "LETSENCRYPT_EMAIL=wildcardd@gmx.de" jenkins:latest
+
+Examples
+docker-compose up -d
+docker logs -f c4fcc9e702ea
+docker network ls
+docker inspect 4f3e
+docker volume inspect 6812fc87f87f402d0ba55d85d07e1bf1ceb3bc3672ae88306309507ffd4d1e92
+
+
+
